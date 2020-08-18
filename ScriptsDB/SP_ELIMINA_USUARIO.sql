@@ -1,0 +1,8 @@
+CREATE PROCEDURE ELIMINA_USUARIO(
+@IDUSUARIO INT =NULL
+)AS
+BEGIN 
+DELETE FROM Soluciones_Desarrollo.dbo.Usuario
+where IdUsuario =@IDUSUARIO
+END 
+

@@ -1,0 +1,6 @@
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\bin\Debug\ExamenWebSalinas.Entidades.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\bin\Debug\ExamenWebSalinas.Entidades.pdb
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\obj\Debug\ExamenWebSalinas.Entidades.csprojAssemblyReference.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\obj\Debug\ExamenWebSalinas.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\obj\Debug\ExamenWebSalinas.Entidades.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Entidades\obj\Debug\ExamenWebSalinas.Entidades.pdb

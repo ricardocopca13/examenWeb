@@ -1,0 +1,154 @@
+﻿
+@using ExamenWebSalinas.Entidades.ControlUsuarios;
+@model List<Usuarios>
+
+
+<div class="col-md-8">
+    <h4 class="page-title">Usuarios</h4>
+</div>
+<div class="col-md-12 col-sm-12" style="height:400px; overflow:auto;">
+
+    <table class="table table-striped table-bordered dataTable" id="tbUsuarios" style="font-size:12px;">
+        <thead>
+            <tr>
+                <th class="hidden">IdUsuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Usuario</th>
+                <th>Eliminar</th>
+                <th>Cambiar Contraseña</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tbodyUsuarios">
+            @foreach (var item in Model)
+            {
+            <tr class="tr">
+                <td class="hidden">@item.IdUsuario </td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellidos</td>
+                <td>@item.Usuario</td>
+                <td style="text-align:center;"><span class='l1s btn btn-xs btn-danger glyphicon glyphicon-trash'></span></td>
+                <td style="text-align:center;"><span class='l2s btn btn-xs btn-primary glyphicon glyphicon-pencil'></span></td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $("span.l1s").click(function () {
+            IdUsuario = $(this).parents("tr").find("td").eq(0).html();
+            ValidarEliminarUsuario(IdUsuario);
+        });
+
+
+
+        $("span.l2s").click(function () {
+            $('#idContrasena').val("");
+
+            $("#btnCancelar").show();
+            $("#btnEditar").show();
+            $("#btnGuardar").hide();
+
+            var IdUsuario = $(this).parents("tr").find("td").eq(0).html();
+            var Nombre = $(this).parents("tr").find("td").eq(1).html();
+            var Apellidos = $(this).parents("tr").find("td").eq(2).html();
+            var Usuario = $(this).parents("tr").find("td").eq(3).html();
+
+            $("#idUsuarioPadre").val(IdUsuario);
+
+            $('#idNombre').val(Nombre);
+            $('#idApellidos').val(Apellidos);
+            $('#idUsuario').val(Usuario);
+
+            $('#idNombre').prop('disabled', true);
+            $('#idApellidos').prop('disabled', true);
+            $('#idUsuario').prop('disabled', true);
+
+
+            
+        });
+
+    });
+
+    function ValidarEliminarUsuario(IdUsuario) {
+        swal("¿Está seguro de eliminar el Usuario?", {
+            buttons: {
+                ok: "Si",
+                cancel: "No"
+            },
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "ok":
+                        EliminarUsuario(IdUsuario);
+                        break;
+
+                    case "cancel":
+                        break;
+                }
+            });
+    }
+
+
+    function EliminarUsuario(IdUsuario) {
+
+        var parametros = {
+
+            "IdUsuario": IdUsuario
+
+        };
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: '@Url.Content("~/AdministracionUsuarios/EliminarUsuario")',
+            data: JSON.stringify(parametros),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                if (data) {
+                    swal("", "El usuario se eliminó correctamente.", "success");
+                    RecargarTabla();
+
+                }
+                else {
+                    swal('', 'Ha ocurrido un error al intentar eliminar el usuario.', "error");
+                }
+
+            },
+            error: function (r) {
+                swal('', 'Ha ocurrido un error al intentar eliminar el usuario.', "error");
+            }
+        });
+    }
+
+
+    function RecargarTabla() {
+
+    var urlObtieneLista = '@Url.Content("~/AdministracionUsuarios/ListaUsuariosRecarga")';
+    $.ajax({
+        type: "POST",
+        url: urlObtieneLista,
+        processData: true,
+
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log('some error occured', textStatus, errorThrown);
+        },
+        success: function (data) {
+            $("#dvResult").empty();
+            $("#dvResult").html(data);
+          
+
+        }
+    });
+
+    }
+
+
+</script>

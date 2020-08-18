@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Inicio de Sesión";
+}
+<link href="~/Content/css/FondoLogin.css" rel="stylesheet" />
+
+<style>
+    label {
+        font-size: 130.5%;
+    }
+
+</style>
+
+
+<div class="text-center">
+
+    <h1>Soluciones Empresariales</h1>
+    <br />
+    <h3>Iniciar Sesión</h3>
+    <br />
+</div>
+<div class="container">
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="text-center alert alert-danger">@ViewBag.Message</div>
+        }
+    }
+    @using (Html.BeginForm("Acceso", "Login", FormMethod.Post))
+    {
+        <div class="form-inline">
+            <div class="col-sm-4"></div>
+            <label>Usuario:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control" placeholder="Usuario" name="usuario" value="" />
+        </div>
+        <br />
+        <br />
+        <div class="form-inline">
+            <div class="col-sm-4"></div>
+            <label>Contraseña:</label>
+            <input type="password" class="form-control" placeholder="Contraseña" name="contrasena" value="" />
+        </div>
+        <br />
+        <br />
+        <div class="form-inline">
+            <div class="col-sm-5"></div>
+            <button class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Control de Usuarios</h2>
+
+<style>
+
+    .label-required {
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .label-count {
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+    }
+</style>
+
+
+
+<div class="page-content">
+    <!-- CONTAINER -->
+    <div class="container">
+        <div class="row" style="margin-bottom: 25px;  text-align:right">
+            <div class="col-md-4">
+                <input class="hidden" type="text" id="idUsuarioPadre" />
+
+                <label>Nombre:</label>
+
+                <input type="text" id="idNombre" />
+
+            </div>
+            <div class="col-md-4">
+                <label>Apellidos:</label>
+                <input type="text" id="idApellidos" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 25px;  text-align:right">
+            <div class="col-md-4">
+
+                <label>Usuario:</label>
+
+                <input type="text" id="idUsuario" />
+
+            </div>
+            <div class="col-md-4">
+                <label>Contraseña:</label>
+                <input type="password" id="idContrasena" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 10px; text-align:right">
+            <div class="col-lg-9">
+                <input type="button" value="Registrar" id="btnGuardar" class="btn btn-primary" />
+                <input type="button" value="Cancelar" id="btnCancelar" class="btn btn-danger" />
+                <input type="button" value="Editar" id="btnEditar" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+
+                <div class="row">
+                    <div id="dvResult">
+                        @{ Html.RenderAction("ListaUsuarios"); }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $("#btnCancelar").hide();
+        $("#btnEditar").hide();
+
+        $("#btnCancelar").click(function () {
+            $("#btnCancelar").hide();
+            $("#btnEditar").hide();
+            $("#btnGuardar").show();
+
+            $("#idNombre").val("");
+            $("#idApellidos").val("");
+            $("#idUsuario").val("");
+            $("#idContrasena").val("");
+
+            $('#idNombre').prop('disabled', false);
+            $('#idApellidos').prop('disabled', false);
+            $('#idUsuario').prop('disabled', false);
+
+        });
+
+
+        $("#btnEditar").click(function () {
+            if ($("#idContrasena").val()== "") {
+                swal('', 'Falta llenar campo de contraseña.', "warning");
+                return
+            }
+            var idUsuario = $("#idUsuarioPadre").val();
+            ValidarActualizarUsuario(idUsuario);
+
+        });
+
+        $("#btnGuardar").click(function () {
+
+            if ($("#idNombre").val() == "" || $("#idApellidos").val() == "" || $("#idUsuario").val() == "" || $("#idContrasena").val() == "") {
+                swal('', 'Falta llenar campos del formulario.', "warning");
+                return
+            }
+            var parametros = {
+                model:{
+                    "Nombre": $("#idNombre").val(),
+                    "Apellidos": $("#idApellidos").val(),
+                    "Usuario": $("#idUsuario").val(),
+                    "Contrasena": $("#idContrasena").val(),
+                }
+        };
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: '@Url.Content("~/AdministracionUsuarios/RegistrarUsuario")',
+            data: JSON.stringify(parametros),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                if (data) {
+                    swal("", "El usuario se guardó correctamente.", "success");
+                    RecargarTabla();
+
+                    $("#idNombre").val("")
+                    $("#idApellidos").val("")
+                    $("#idUsuario").val("")
+                    $("#idContrasena").val("")
+
+                }
+                else {
+                    swal('', 'Ha ocurrido un error al intentar guardar el usuario.', "error");
+                }
+
+            },
+            error: function (r) {
+                swal('', 'Ha ocurrido un error al intentar guardar el usuario.', "error");
+            }
+        });
+        });
+
+
+
+    });
+
+    function ValidarEliminarUsuario(IdUsuario) {
+        swal("¿Está seguro de eliminar el Usuario?", {
+            buttons: {
+                ok: "Si",
+                cancel: "No"
+            },
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "ok":
+                        EliminarUsuario(IdUsuario);
+                        break;
+
+                    case "cancel":
+                        break;
+                }
+            });
+    }
+
+
+    function ValidarActualizarUsuario(IdUsuario) {
+        swal("¿Está seguro de actualizar la contraseña?", {
+            buttons: {
+                ok: "Si",
+                cancel: "No"
+            },
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "ok":
+                        UpdateUsuario(IdUsuario);
+                        break;
+
+                    case "cancel":
+                        break;
+                }
+            });
+    }
+
+
+        function UpdateUsuario(IdUsuario) {
+
+        var parametros = {
+            model: {
+                "IdUsuario": IdUsuario,
+                "Contrasena": $("#idContrasena").val()
+            }
+            
+
+        };
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: '@Url.Content("~/AdministracionUsuarios/ActualizarUsuario")',
+            data: JSON.stringify(parametros),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                if (data) {
+                    swal("", "El usuario se actualizó correctamente.", "success");
+                    RecargarTabla();
+
+                    $("#btnCancelar").hide();
+                    $("#btnEditar").hide();
+                    $("#btnGuardar").show();
+
+                    $("#idNombre").val("");
+                    $("#idApellidos").val("");
+                    $("#idUsuario").val("");
+                    $("#idContrasena").val("");
+
+                    $('#idNombre').prop('disabled', false);
+                    $('#idApellidos').prop('disabled', false);
+                    $('#idUsuario').prop('disabled', false);
+
+                }
+                else {
+                    swal('', 'Ha ocurrido un error al intentar actualizar el usuario.', "error");
+                }
+
+            },
+            error: function (r) {
+                swal('', 'Ha ocurrido un error al intentar actualizar el usuario.', "error");
+            }
+        });
+    }
+
+
+
+    function EliminarUsuario(IdUsuario) {
+
+        var parametros = {
+
+            "IdUsuario": IdUsuario
+
+        };
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: '@Url.Content("~/AdministracionUsuarios/EliminarUsuario")',
+            data: JSON.stringify(parametros),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                if (data) {
+                    swal("", "El usuario se eliminó correctamente.", "success");
+                    RecargarTabla();
+
+                }
+                else {
+                    swal('', 'Ha ocurrido un error al intentar eliminar el usuario.', "error");
+                }
+
+            },
+            error: function (r) {
+                swal('', 'Ha ocurrido un error al intentar eliminar el usuario.', "error");
+            }
+        });
+    }
+
+
+    function RecargarTabla() {
+
+    var urlObtieneLista = '@Url.Content("~/AdministracionUsuarios/ListaUsuariosRecarga")';
+    $.ajax({
+        type: "POST",
+        url: urlObtieneLista,
+        processData: true,
+
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log('some error occured', textStatus, errorThrown);
+        },
+        success: function (data) {
+            $("#dvResult").empty();
+            $("#dvResult").html(data);
+
+
+        }
+    });
+
+    }
+
+
+</script>

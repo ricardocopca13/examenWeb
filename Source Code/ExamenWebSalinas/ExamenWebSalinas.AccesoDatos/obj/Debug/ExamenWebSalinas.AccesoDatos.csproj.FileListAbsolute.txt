@@ -1,0 +1,6 @@
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\bin\Debug\ExamenWebSalinas.AccesoDatos.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\bin\Debug\ExamenWebSalinas.AccesoDatos.pdb
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\obj\Debug\ExamenWebSalinas.AccesoDatos.csprojAssemblyReference.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\obj\Debug\ExamenWebSalinas.AccesoDatos.csproj.CoreCompileInputs.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\obj\Debug\ExamenWebSalinas.AccesoDatos.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.AccesoDatos\obj\Debug\ExamenWebSalinas.AccesoDatos.pdb

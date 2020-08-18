@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE OBTIENE_USUARIO(
+@USUARIO VARCHAR(100)=NULL,
+@CONTRASENA VARCHAR(100)=NULL
+)AS
+BEGIN
+SELECT 
+Nombre,
+Apellidos,
+Usuario
+FROM Soluciones_Desarrollo.dbo.Usuario
+where Usuario =@USUARIO and DECRYPTBYPASSPHRASE('password', Contrasena) =@CONTRASENA COLLATE SQL_Latin1_General_CP1_CS_AS
+END 
+
+
+
+

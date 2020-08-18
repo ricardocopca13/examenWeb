@@ -1,0 +1,11 @@
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.Negocio.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.Negocio.pdb
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.AccesoDatos.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.Entidades.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.AccesoDatos.pdb
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\bin\Debug\ExamenWebSalinas.Entidades.pdb
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\obj\Debug\ExamenWebSalinas.Negocio.csprojAssemblyReference.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\obj\Debug\ExamenWebSalinas.Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\obj\Debug\ExamenWebSalinas.Negocio.csproj.CopyComplete
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\obj\Debug\ExamenWebSalinas.Negocio.dll
+C:\Users\Jonathan\source\repos\ExamenWebSalinas\ExamenWebSalinas.Negocio\obj\Debug\ExamenWebSalinas.Negocio.pdb
